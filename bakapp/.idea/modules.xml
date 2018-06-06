@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bakapp.iml" filepath="$PROJECT_DIR$/.idea/modules/bakapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bakapp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bakapp_main.iml" group="bakapp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bakapp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bakapp_test.iml" group="bakapp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order.iml" filepath="$PROJECT_DIR$/.idea/modules/order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order_main.iml" filepath="$PROJECT_DIR$/.idea/modules/order_main.iml" group="order" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order_test.iml" filepath="$PROJECT_DIR$/.idea/modules/order_test.iml" group="order" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,12 @@
+---
+applications:
+- name: bakapp
+  memory: 768M
+  instances: 1
+  disk_quota: 512M
+  random-route: false
+  buildpack: java_buildpack
+  path: /build/libs/bakapp-0.1.jar
+  services:
+   - bakapp-sql
+   - bakapp-mq
