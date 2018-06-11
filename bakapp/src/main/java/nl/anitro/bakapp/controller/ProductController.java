@@ -41,9 +41,4 @@ public class ProductController {
         return new ResponseEntity(this.productService.getProductByName(productname), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/placeorder", method = RequestMethod.POST)
-    public ResponseEntity placeOrder(@RequestHeader String username, @RequestBody ProductWrapper products){
-        return new ResponseEntity(this.productService.placeOrder(username, products), HttpStatus.OK);
-    }
-
 }

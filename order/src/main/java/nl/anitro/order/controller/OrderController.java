@@ -31,7 +31,11 @@ public class OrderController {
 
     @RequestMapping(value="/order", method = RequestMethod.POST)
     public ResponseEntity placeOrder(@RequestHeader String username, @RequestBody ProductWrapper products){
-        return new ResponseEntity(this.orderService.createOrder(username, products), HttpStatus.OK);
+        try {
+            return new ResponseEntity(this.orderService.createOrder(username, products), HttpStatus.OK);
+        } catch (BakappException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package nl.anitro.order;
 
-import nl.anitro.order.messaging.OrderPlaced;
-import nl.anitro.order.messaging.OrderRequest;
+import nl.anitro.order.messaging.HandleValidation;
+import nl.anitro.order.messaging.ValidateUser;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,22 +16,22 @@ public class OrderApplication {
     }
 
     @Bean
-    public OrderRequest orderRequest(){
-        return new OrderRequest();
+    public ValidateUser validateUser(){
+        return new ValidateUser();
     }
 
     @Bean
-    public OrderPlaced orderPlaced(){
-        return new OrderPlaced();
+    public HandleValidation handleValidation() { return new HandleValidation(); }
+
+
+    @Bean
+    public Queue validateUserReplyQueue(){
+        return new Queue("VALIDATE_USER_REPLY");
     }
 
     @Bean
-    public Queue placeNewOrderQueue(){
-        return new Queue("PLACE_NEW_ORDER");
+    public Queue validateUserQueue(){
+        return new Queue("VALIDATE_USER");
     }
 
-    @Bean
-    public Queue getOrderByName(){
-        return new Queue("GET_ORDER_BY_NAME");
-    }
 }

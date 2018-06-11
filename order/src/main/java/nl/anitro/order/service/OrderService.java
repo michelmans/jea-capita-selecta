@@ -3,15 +3,13 @@ package nl.anitro.order.service;
 import nl.anitro.order.domain.BakappException;
 import nl.anitro.order.domain.Order;
 import nl.anitro.order.domain.OrderProduct;
-import nl.anitro.order.dto.OrderDto;
-import nl.anitro.order.messaging.OrderRequest;
+import nl.anitro.order.messaging.ValidateUser;
 import nl.anitro.order.repository.OrderProductRepository;
 import nl.anitro.order.repository.OrderRepository;
 import nl.anitro.order.wrapper.ProductWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +18,13 @@ public class OrderService {
 
     private OrderRepository orderRepository;
     private OrderProductRepository orderProductRepository;
+    private ValidateUser validateUser;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderProductRepository orderProductRepository){
+    public OrderService(OrderRepository orderRepository, OrderProductRepository orderProductRepository, ValidateUser validateUser){
         this.orderRepository = orderRepository;
         this.orderProductRepository = orderProductRepository;
+        this.validateUser = validateUser;
     }
 
     public Order getOrderById(Long id) throws BakappException {
@@ -42,10 +42,11 @@ public class OrderService {
         return orderRepository.save(o);
     }
 
-    public Order createOrder(String username, ProductWrapper products){
+    public Order createOrder(String username, ProductWrapper products) throws BakappException {
 
         Order o = new Order();
         o.setUsername(username);
+        o.setUserValidated(false);
         this.orderRepository.save(o);
 
         products.getProducts().forEach(item -> {
@@ -56,7 +57,15 @@ public class OrderService {
 
         Order returnOrder = this.orderRepository.findById(o.getId()).get();
 
+        this.validateUser.validateUser(o.getUsername(), o.getId());
+
         return returnOrder;
+    }
+
+    public void confirmOrder(boolean state, Long orderId) throws BakappException {
+        Order o = getOrderById(orderId);
+        o.setUserValidated(state);
+        this.orderRepository.save(o);
     }
 
 }

@@ -1,6 +1,7 @@
 package nl.anitro.bakapp;
 
-import nl.anitro.bakapp.messaging.OrderSender;
+import nl.anitro.bakapp.messaging.ValidateUserReply;
+import nl.anitro.bakapp.messaging.ValidateUserRequest;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,18 +15,22 @@ public class BakappApplication {
     }
 
     @Bean
-    public OrderSender orderSender(){
-        return new OrderSender();
+    public ValidateUserRequest validateUserRequest(){
+        return new ValidateUserRequest();
     }
 
     @Bean
-    public Queue placeNewOrderQueue(){
-        return new Queue("PLACE_NEW_ORDER");
+    public ValidateUserReply validateUserReply() { return new ValidateUserReply(); }
+
+    @Bean
+    public Queue validateUserReplyQueue(){
+        return new Queue("VALIDATE_USER_REPLY");
     }
 
     @Bean
-    public Queue getOrderByName(){
-        return new Queue("GET_ORDER_BY_NAME");
+    public Queue validateUserQueue(){
+        return new Queue("VALIDATE_USER");
     }
+
 
 }

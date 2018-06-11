@@ -3,7 +3,6 @@ package nl.anitro.bakapp.service;
 import nl.anitro.bakapp.domain.BakappException;
 import nl.anitro.bakapp.domain.Product;
 import nl.anitro.bakapp.domain.User;
-import nl.anitro.bakapp.messaging.OrderSender;
 import nl.anitro.bakapp.repository.UserRepository;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,10 @@ import java.util.Optional;
 public class UserService {
 
     private UserRepository userRepository;
-    private OrderSender orderSender;
 
     @Autowired
-    public UserService(UserRepository userRepository, OrderSender orderSender){
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.orderSender = orderSender;
 
         User user1 = new User("user1", "examplestreet 1 temptown");
         User user2 = new User("user2", "tempstreet 1 exampletown");

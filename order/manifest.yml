@@ -8,5 +8,5 @@ applications:
   buildpack: java_buildpack
   path: /build/libs/order-0.1.jar
   services:
-   - bakapp-sql
+   - order-sql
    - bakapp-mq

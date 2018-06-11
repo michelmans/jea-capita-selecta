@@ -13,14 +13,17 @@ public class Order {
 
     private String username;
 
+    private boolean userValidated;
+
     @OneToMany(mappedBy = "order")
     private List<OrderProduct> orderProducts;
 
     public Order(){}
 
-    public Order(String username, List<OrderProduct> orderProducts){
+    public Order(String username, boolean userValidated, List<OrderProduct> orderProducts){
         this.username = username;
         this.orderProducts = orderProducts;
+        this.userValidated = userValidated;
     }
 
     public long getId() {
@@ -45,5 +48,13 @@ public class Order {
 
     public void setOrderProducts(List<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
+    }
+
+    public boolean isUserValidated() {
+        return userValidated;
+    }
+
+    public void setUserValidated(boolean userValidated) {
+        this.userValidated = userValidated;
     }
 }
